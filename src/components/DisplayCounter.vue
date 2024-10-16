@@ -20,5 +20,13 @@ div{
   margin: 20px auto;
   max-width: 200px;
   border-radius: 4px;
+
+  @include scr-phones{
+    max-width: 90vw;
+    background-color: yellow;
+  }
+  @include scr-tablets{
+    background-color: aqua;
+  }
 }
 </style>

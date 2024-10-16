@@ -1,0 +1,6 @@
+@use 'sass:math';
+@use './variables.scss';
+
+@function rem($target, $context: $base-font-size) {	
+  @return math.div($target, $context) * 1rem;
+}
