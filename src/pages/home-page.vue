@@ -2,7 +2,9 @@
   <div>
     <h1>home</h1>
    
-    <HelloWorld msg="Vite + Vue" />
+    <HelloWorld v-if="hasHallow" msg="Vite + Vue" />
+
+    <button @click="toggleHelloWord()">toggleHelloWord</button>
   </div>
 </template>
 
@@ -12,6 +14,16 @@ import HelloWorld from "../components/HelloWorld.vue";
 export default {
   components:{
     HelloWorld
+  },
+  data(){
+    return {
+      hasHallow: true
+    }
+  },
+  methods: {
+    toggleHelloWord(){
+      this.hasHallow = !this.hasHallow
+    }
   }
 };
 </script>
