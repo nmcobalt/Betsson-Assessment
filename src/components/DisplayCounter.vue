@@ -1,36 +1,32 @@
 <template>
   <div>
-    <button ref="counter" class="display-counter">{{ counter }}</button>
+    <div class="display-counter">{{ counter }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useTemplateRef, onMounted } from "vue";
-
-// type DivType = InstanceType<typeof HTMLButtonElement>
-
-const btn = useTemplateRef<HTMLButtonElement>("counter");
+import { onMounted } from "vue";
 
 const { counter } = defineProps({
   counter: Number,
 });
 
-const printClicked = (e: Event) => {
-  console.log("clicked", e.target);
-};
 
 onMounted(() => {
   console.log("mounted");
-  btn.value?.addEventListener("click", printClicked);
 });
 </script>
 
 <style lang="scss" scoped>
 .display-counter {
+  display: inline-block;
+  padding: 10px 20px;
+  min-width: 150px;
   background-color: var(--color-primary, red);
   margin: 20px auto;
   max-width: 200px;
   border-radius: 4px;
+  @include fs(24,24,400, white);
 
   @include scr-phones {
     max-width: none;

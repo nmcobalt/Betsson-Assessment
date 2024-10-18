@@ -1,9 +1,9 @@
 <template>
   <header>
-    <div>Hello App!</div>
     <nav>
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/assessment">Assessment</RouterLink>
     </nav>
   </header>
 

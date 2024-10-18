@@ -4,3 +4,9 @@
 @function rem($target, $context: $base-font-size) {	
   @return math.div($target, $context) * 1rem;
 }
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}

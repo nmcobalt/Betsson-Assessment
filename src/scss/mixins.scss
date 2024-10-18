@@ -1,20 +1,37 @@
-@mixin scr-phones{
+@mixin scr-phones {
   @media screen and (max-width: rem(767)) {
     @content;
   }
 }
-@mixin scr-tablets{
+@mixin scr-tablets {
   @media screen and (min-width: rem(768)) and (max-width: rem(1023)) {
     @content;
   }
 }
-@mixin scr-desktops{
+@mixin scr-desktops {
   @media screen and (min-width: rem(1024)) {
     @content;
   }
 }
-@mixin scr-desktops-large{
+@mixin scr-desktops-large {
   @media screen and (min-width: rem(1921)) {
     @content;
+  }
+}
+@mixin fs($fs: null, $lh: null, $weight: null, $color: null) {
+  @if $fs != null {
+    font-size: rem(strip-unit($fs));
+  } @else {
+    $fs: $base-font-size;
+    font-size: rem(strip-unit($fs));
+  }
+  @if $lh != null {
+    line-height: strip-unit($lh) / strip-unit($fs);
+  }
+  @if $weight != null {
+    font-weight: $weight;
+  }
+  @if $color != null {
+    color: $color;
   }
 }
