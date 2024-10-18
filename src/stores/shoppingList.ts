@@ -42,6 +42,9 @@ export const useShoppingListStore = defineStore("shoppingList", {
   getters: {
     meats(state) {
       return state.list.filter((item) => item.type === "meat")
+    },
+    filterList: (state) => {
+      return (filterType:string) => state.list.filter((item) => item.type === filterType)
     }
   },
 });

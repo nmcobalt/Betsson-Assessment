@@ -11,6 +11,7 @@
       <ShoppingListItem v-for="item in shoppingList.list" :key="item.id" :item="item"></ShoppingListItem>
     </div>
 
+    
     <hr />
 
     <h3>The meats on the list:</h3>
@@ -18,10 +19,19 @@
     <div class="shopping-list">
       <ShoppingListItem v-for="item in shoppingList.meats" :key="item.id" :item="item"></ShoppingListItem>
     </div>
+
+    <hr />
+
+    <h3>Whatever type here (fruit):</h3>
+
+    <div class="shopping-list">
+      <ShoppingListItem v-for="item in filterList('fruit')" :key="item.id" :item="item"></ShoppingListItem>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import { storeToRefs } from 'pinia'
 import { useShoppingListStore } from "../stores/shoppingList";
 import ShoppingListItem from "./ShoppingListItem.vue";
 
@@ -32,7 +42,8 @@ export default {
   },
   setup() {
     const shoppingList = useShoppingListStore();
-    return { shoppingList };
+    const { filterList } = storeToRefs(shoppingList)
+    return { shoppingList, filterList };
   },
   props: {
     msg: {
