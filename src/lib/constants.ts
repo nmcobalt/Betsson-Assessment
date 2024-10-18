@@ -1,5 +1,5 @@
-const MAX_COUNTER_VALUE: Readonly<number> = 10
-const MIN_COUNTER_VALUE: Readonly<number> = 0
+const MAX_COUNTER_VALUE = 10
+const MIN_COUNTER_VALUE = 0
 
 export {
   MAX_COUNTER_VALUE,
