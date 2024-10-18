@@ -2,17 +2,17 @@
   <h1>About</h1>
   Current counter is 
   
-  <DisplayCounter :counter="counter.count"></DisplayCounter>
+  <ControlCounter></ControlCounter>
 </template>
 
 <script lang="ts">
 import { useCounterStore } from "../stores/counter";
-import DisplayCounter from "../components/DisplayCounter.vue";
+import ControlCounter from "../components/ControlCounter.vue";
 
 export default {
   name: 'about-us',
   components:{
-    DisplayCounter
+    ControlCounter
   },
   setup() {
     const counter = useCounterStore();

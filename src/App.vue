@@ -1,10 +1,13 @@
 <template>
-  <header>
+  <header class="header">
     <nav>
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/assessment">Assessment</RouterLink>
     </nav>
+    <div class="header__aside">
+      <DisplayCounter :counter="counter.count" :slim="true"></DisplayCounter>
+    </div>
   </header>
 
   <main class="container">
@@ -13,11 +16,22 @@
 </template>
 
 <script lang="ts">
-export default {};
+import { useCounterStore } from "./stores/counter";
+import DisplayCounter from './components/DisplayCounter.vue';
+
+export default {
+  components: {
+    DisplayCounter
+  },  
+  setup() {
+    const counter = useCounterStore();
+    return { counter }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-header {
+.header {
   position: sticky;
   display: flex;
   gap: var(--gap-24);
@@ -30,6 +44,10 @@ header {
   nav{
     display: flex;
     gap: var(--gap-24);
+  }
+
+  &__aside{
+    margin-left: auto;
   }
 }
 </style>

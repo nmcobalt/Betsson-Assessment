@@ -1,28 +1,29 @@
 <template>
   <div>
     <h1>home</h1>
+    
    
-    <HelloWorld v-if="hasHallow" msg="Vite + Vue" />
+    <ShoppingList v-if="hasList" msg="My shopping list" />
 
-    <button @click="toggleHelloWord()">toggleHelloWord</button>
+    <button @click="toggleHelloWord()">toggle ShoppingList</button>
   </div>
 </template>
 
 <script lang="ts">
-import HelloWorld from "../components/HelloWorld.vue";
+import ShoppingList from "../components/ShoppingList.vue";
 
 export default {
   components:{
-    HelloWorld
+    ShoppingList
   },
   data(){
     return {
-      hasHallow: true
+      hasList: true
     }
   },
   methods: {
     toggleHelloWord(){
-      this.hasHallow = !this.hasHallow
+      this.hasList = !this.hasList
     }
   }
 };
