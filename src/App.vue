@@ -10,7 +10,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
     <RouterView />
   </main>
 </template>
