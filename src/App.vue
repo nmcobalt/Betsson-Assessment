@@ -98,8 +98,10 @@ export default {
   }
 }
 .main-content {
+  position: relative;
   display: flex;
   overflow: hidden;
   max-width: 100dvw;
+  min-height: 100vh;
 }
 </style>
