@@ -43,12 +43,13 @@ export default {
     console.log(router.getRoutes())
   },
   methods: {
-    getPathIndex(path: string) {
-      const index = router.getRoutes().findIndex((route) => route.path === path);
+    getPathIndex(name: string) {
+      const index = router.getRoutes().findIndex((route) => route.name === name);
+      console.log(index)
       return index >= 0 ? index : 0;
     },
     resolveDirection(fromIndex: number, toIndex: number) {
-      this.direction = fromIndex > toIndex ? "left" : "right";
+      this.direction = fromIndex > toIndex ? "right" : "left";
     }
   },
   computed: {
@@ -58,8 +59,9 @@ export default {
   },
   watch: {
       '$route': function (from, to) {
+         console.log("from", from, "to", to);
 
-        this.resolveDirection(this.getPathIndex(from.path), this.getPathIndex(to.path))
+        this.resolveDirection(this.getPathIndex(from.name), this.getPathIndex(to.name))
 
         // console.log("from", from, "to", to);
         new Promise((resolve) => {

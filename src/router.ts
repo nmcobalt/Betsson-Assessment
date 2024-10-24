@@ -7,9 +7,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", redirect: "/home" },
-    { path: "/home", component: HomePage },
-    { path: "/about", component: AboutUs },
-    { path: "/assessment", component: Assessment },
+    { path: "/home", component: HomePage, name: "home" },
+    { path: "/about/:id?", component: AboutUs, name: "about" },
+    { path: "/assessment", component: Assessment, name: "assessment" },
   ],
   linkActiveClass: "active",
 });
