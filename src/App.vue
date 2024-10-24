@@ -3,6 +3,7 @@
     <nav>
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/about/other">About other</RouterLink>
       <RouterLink to="/assessment">Assessment</RouterLink>
     </nav>
     <div class="header__aside">
@@ -22,7 +23,7 @@
 <script lang="ts">
 import { useCounterStore } from "./stores/counter";
 import DisplayCounter from "./components/DisplayCounter.vue";
-import router from "./router.ts";
+import { routesList } from "./router.ts";
 
 //import { NavigationHookAfter, RouterView } from "vue-router";
 
@@ -36,30 +37,31 @@ export default {
   },
   data(){
     return {
-      direction: "left"
+      direction: "left",
+      routes: [...routesList]
     }
   },
   mounted() {
-    console.log(router.getRoutes())
+   // console.log(router.getRoutes())
   },
   methods: {
     getPathIndex(name: string) {
-      const index = router.getRoutes().findIndex((route) => route.name === name);
-      console.log(index)
-      return index >= 0 ? index : 0;
+      const index = this.routes.findIndex((route) => route.name === name);
+      //console.log(name, index, this.routes)
+      return index ? index : 0;
     },
     resolveDirection(fromIndex: number, toIndex: number) {
-      this.direction = fromIndex > toIndex ? "right" : "left";
+      this.direction = fromIndex > toIndex ? "right" : (fromIndex < toIndex ? "left" : "none");
     }
   },
   computed: {
     directionTransitionName() {
-      return this.direction === "left" ? "slide-left" : "slide-right";
+      return this.direction === "left" ? "slide-left" : (this.direction === "right" ? "slide-right" : "fade");
     }
   },
   watch: {
-      '$route': function (from, to) {
-         console.log("from", from, "to", to);
+      '$route': function (to, from) {
+         //console.log("from", from.name, this.getPathIndex(from.name), "to", to.name, this.getPathIndex(to.name));
 
         this.resolveDirection(this.getPathIndex(from.name), this.getPathIndex(to.name))
 
