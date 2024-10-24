@@ -25,6 +25,8 @@ export default {
 
 <style scoped>
 .about {
+  position: absolute;
+  height: 100%;
   width: 100dvw;
   flex-shrink: 0;
   background-color: coral

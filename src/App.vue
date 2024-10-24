@@ -13,7 +13,7 @@
 
   <main class="main-content">
     <RouterView v-slot="{ Component, route }">
-      <Transition :name="directionTransitionName" mode="out-in">
+      <Transition :name="directionTransitionName" mode="default">
         <component :is="Component" :key="route.path" />
       </Transition>
     </RouterView>
