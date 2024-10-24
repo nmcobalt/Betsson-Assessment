@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1>home</h1>
     
    
@@ -30,6 +30,11 @@ export default {
 </script>
 
 <style scoped>
+.home{
+  flex: 1 1 100%;
+
+  background-color: brown;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
