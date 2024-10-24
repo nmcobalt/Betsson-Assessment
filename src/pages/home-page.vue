@@ -31,7 +31,8 @@ export default {
 
 <style scoped>
 .home{
-  flex: 1 1 100%;
+  width: 100dvw;
+  flex-shrink: 0;
 
   background-color: brown;
 }
