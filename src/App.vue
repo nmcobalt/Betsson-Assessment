@@ -34,18 +34,25 @@ const route = useRoute();
 
 const counter = useCounterStore();
 
-const routes = [...routesList];
+const routes: ListItem[] = routesList.map((route) => ({
+  name: (route.name && typeof route.name === "string") ? route.name : "",
+}));
 
 const { direction, resolveDirection}  = useTransitionDirection(routes as ListItem[], "name")  //ref("left");
 
 const { directionTransitionName } = useTransitionDirectionClassNames(direction)
 
 watch(
-  () => route.name,
-  (newName, oldName) => {
+  () => route.path,
+  (newPath, oldPath) => {
 
-    const newNameStr = newName ? newName.toString() : "";
-    const oldNameStr = oldName ? oldName.toString() : "";
+    const getBaseName = (path: string) => {
+      const segments = path.split("/");
+      return segments[1] || ""; // Get the base segment, or "" if it's the root path
+    };
+
+    const newNameStr = getBaseName(newPath)?.toString() ?? "";
+    const oldNameStr = getBaseName(oldPath)?.toString() ?? "";
 
     resolveDirection(oldNameStr, newNameStr)
 
