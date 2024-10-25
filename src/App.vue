@@ -20,62 +20,39 @@
   </main>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useCounterStore } from "./stores/counter";
 import DisplayCounter from "./components/DisplayCounter.vue";
 import { routesList } from "./router.ts";
+import { computed,  watch } from "vue";
+import { useRoute } from "vue-router";
+import { useTransitionDirection, ListItem } from "./composables/useTransitionDirection";
+//import { RouteRecordNameGeneric, useRoute } from "vue-router";
 
-//import { NavigationHookAfter, RouterView } from "vue-router";
+const route = useRoute();
 
-export default {
-  components: {
-    DisplayCounter,
-  },
-  setup() {
-    const counter = useCounterStore();
-    return { counter };
-  },
-  data(){
-    return {
-      direction: "left",
-      routes: [...routesList]
-    }
-  },
-  mounted() {
-   // console.log(router.getRoutes())
-  },
-  methods: {
-    getPathIndex(name: string) {
-      const index = this.routes.findIndex((route) => route.name === name);
-      //console.log(name, index, this.routes)
-      return index ? index : 0;
-    },
-    resolveDirection(fromIndex: number, toIndex: number) {
-      this.direction = fromIndex > toIndex ? "right" : (fromIndex < toIndex ? "left" : "none");
-    }
-  },
-  computed: {
-    directionTransitionName() {
-      return this.direction === "left" ? "slide-left" : (this.direction === "right" ? "slide-right" : "fade");
-    }
-  },
-  watch: {
-      '$route': function (to, from) {
-         //console.log("from", from.name, this.getPathIndex(from.name), "to", to.name, this.getPathIndex(to.name));
+const counter = useCounterStore();
 
-        this.resolveDirection(this.getPathIndex(from.name), this.getPathIndex(to.name))
+const routes = [...routesList];
 
-        // console.log("from", from, "to", to);
-        new Promise((resolve) => {
-          resolve(true);
-          //window.resolveRouteChange = resolve;
-        }).then(() => {
-          // route changed and page DOM mounted!
-        });
-      }
-    }
-  
-};
+const { direction, resolveDirection}  = useTransitionDirection(routes as ListItem[])  //ref("left");
+
+watch(
+  () => route.name,
+  (newName, oldName) => {
+
+    const newNameStr = newName ? newName.toString() : "";
+    const oldNameStr = oldName ? oldName.toString() : "";
+
+    resolveDirection(oldNameStr, newNameStr)
+
+  }
+);
+
+const directionTransitionName = computed(() => {
+  return direction.value === "left" ? "slide-left" : direction.value === "right" ? "slide-right" : "fade";
+});
+
 </script>
 
 <style lang="scss" scoped>

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, computed } from "vue";
+import { computed } from "vue";
 
 const { counter, slim } = defineProps({
   counter: Number,
@@ -18,9 +18,9 @@ const slimClass = computed(() => {
 
 
 
-onMounted(() => {
-  console.log("mounted");
-});
+// onMounted(() => {
+//   console.log("mounted");
+// });
 </script>
 
 <style lang="scss" scoped>
