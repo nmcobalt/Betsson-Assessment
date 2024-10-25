@@ -24,9 +24,10 @@
 import { useCounterStore } from "./stores/counter";
 import DisplayCounter from "./components/DisplayCounter.vue";
 import { routesList } from "./router.ts";
-import { computed,  watch } from "vue";
+import { watch } from "vue";
 import { useRoute } from "vue-router";
 import { useTransitionDirection, ListItem } from "./composables/useTransitionDirection";
+import { useTransitionDirectionClassNames } from "./composables/useTransitionDirectionClassNames";
 //import { RouteRecordNameGeneric, useRoute } from "vue-router";
 
 const route = useRoute();
@@ -36,6 +37,8 @@ const counter = useCounterStore();
 const routes = [...routesList];
 
 const { direction, resolveDirection}  = useTransitionDirection(routes as ListItem[])  //ref("left");
+
+const { directionTransitionName } = useTransitionDirectionClassNames(direction)
 
 watch(
   () => route.name,
@@ -48,10 +51,6 @@ watch(
 
   }
 );
-
-const directionTransitionName = computed(() => {
-  return direction.value === "left" ? "slide-left" : direction.value === "right" ? "slide-right" : "fade";
-});
 
 </script>
 
