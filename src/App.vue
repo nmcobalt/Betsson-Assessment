@@ -36,7 +36,7 @@ const counter = useCounterStore();
 
 const routes = [...routesList];
 
-const { direction, resolveDirection}  = useTransitionDirection(routes as ListItem[])  //ref("left");
+const { direction, resolveDirection}  = useTransitionDirection(routes as ListItem[], "name")  //ref("left");
 
 const { directionTransitionName } = useTransitionDirectionClassNames(direction)
 

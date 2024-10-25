@@ -1,7 +1,7 @@
-import { ref, computed } from "vue";
+import { ref, computed, Ref } from "vue";
 
 
-export const useTransitionDirectionClassNames = (defaultDirection = "left") => {
+export const useTransitionDirectionClassNames = (defaultDirection: Ref<string>) => {
   const direction = ref(defaultDirection);
 
   const directionTransitionName = computed(() => {

@@ -7,7 +7,7 @@ export interface ListItem {
 }
 
 
-export function useTransitionDirection(list: ListItem[], keyToMath = "name", defaultDirection = "left") {
+export function useTransitionDirection<L extends ListItem , K extends keyof ListItem>(list:L[], keyToMath:K, defaultDirection = "left") {
 
   const direction = ref(defaultDirection);
 
@@ -16,9 +16,12 @@ export function useTransitionDirection(list: ListItem[], keyToMath = "name", def
     const fromIndex = getPathIndex(from)
     const toIndex = getPathIndex(to)
     direction.value = fromIndex > toIndex ? "right" : fromIndex < toIndex ? "left" : "none";
+    console.log("direction.value", direction.value);
+
   };
 
   const getPathIndex = ( val: string) => {
+    if (!val || !keyToMath) return 0      
     const index = list.findIndex((item) => item[keyToMath] === val);
     return index ? index : 0;
   };
