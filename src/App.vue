@@ -51,8 +51,8 @@ watch(
       return segments[1] || ""; // Get the base segment, or "" if it's the root path
     };
 
-    const newNameStr = getBaseName(newPath)?.toString() ?? "";
-    const oldNameStr = getBaseName(oldPath)?.toString() ?? "";
+    const newNameStr = getBaseName(newPath) ?? "";
+    const oldNameStr = getBaseName(oldPath) ?? "";
 
     resolveDirection(oldNameStr, newNameStr)
 
