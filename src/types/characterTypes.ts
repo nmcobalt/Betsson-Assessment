@@ -59,3 +59,6 @@ export interface Character {
 	image: Image;
 }
 
+export interface CharacterData {
+  characters: Character[];
+}

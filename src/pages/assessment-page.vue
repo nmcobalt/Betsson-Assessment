@@ -2,7 +2,7 @@
   <div>
     <h1>Assessment Page</h1>
 
-    <div v-if="charactersList.characters?.length" class="characters-list">
+    <div v-if="charactersList.frontFilteredCharacters?.length" class="characters-list">
       <CharacterCard v-for="item in charactersList.characters" :key="item.id" :name="item.name" :image="item.image?.url"></CharacterCard>
     </div>
   </div>
@@ -18,11 +18,13 @@ export default {
   },
   setup() {
     const charactersList = useCharactersStore();
+    charactersList.getCharacters();
+
     return { charactersList };
   },
   mounted() {
-    this.charactersList.getCharacters();
-  },
+    //console.log(this.charactersList.frontFilteredCharacters)
+  }
 };
 </script>
 

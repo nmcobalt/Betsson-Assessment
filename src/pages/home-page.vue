@@ -31,11 +31,6 @@ export default {
 
 <style scoped>
 .home{
-  position: absolute;
-  height: 100%;
-  width: 100dvw;
-  flex-shrink: 0;
-
   background-color: brown;
 }
 .logo {

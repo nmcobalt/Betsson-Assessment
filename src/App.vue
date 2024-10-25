@@ -14,7 +14,7 @@
   <main class="main-content">
     <RouterView v-slot="{ Component, route }">
       <Transition :name="directionTransitionName" mode="default">
-        <component :is="Component" :key="route.path" />
+        <component :is="Component" :key="route.path" class="page" />
       </Transition>
     </RouterView>
   </main>

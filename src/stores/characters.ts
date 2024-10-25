@@ -1,43 +1,49 @@
 import { defineStore } from "pinia";
-import data from "../jsons/mock-data.json";
-import { Character} from "../types/characterTypes"
+//import data from "../jsons/mock-data.json";
+import { Character, AppState, Image } from "../types/characterTypes";
+import {isCharacterData} from "../type-guards/isCharacter";
 
-type PartialCharacter = Partial<Character>
+//type PartialCharacter = Partial<Character>
+
+
+
+interface IFrontFilteredCharacter {
+  id: string;
+  name: string;
+  image: Image;
+}
 
 export const useCharactersStore = defineStore("characters", {
   state: () => {
     return {
-      characters: [] as PartialCharacter[],
+      characters: [] as Character[],
     };
   },
-  actions:{
-    async getCharacters(){
-      try{
+  actions: {
+    async getCharacters() {
+      try {
+        const response = await fetch("/characters/mock-data.json");
+        const data = (await response.json()) as AppState;
 
-        const characters = (await Promise.resolve(data)).characters as PartialCharacter[];
-        this.characters = characters.map((character: PartialCharacter) => {
-          return {
-            id: character.id,
-            name: character.name,
-            image: character.image
-          }
-        });
-
+        if (isCharacterData(data)) {
+          this.characters = data?.characters as Character[];
+        } else {
+          console.error("Data does not match CharacterData type");
+        }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
-    // async fetchCharacters(): Promise<void> {
-    //   const promise: Promise<Character[]> = new Promise((resolve) => {
-    //     resolve(data:Character[]);
-    //   })
-
-    //   this.characters = await promise
-    // },
   },
-  // getters: {
-  //   filteredCharacters(state){
-  //     return (nameValue:string) => state.characters.filter(char=>char.name === nameValue)
-  //   }
-  // }
+  getters: {
+    frontFilteredCharacters(state): IFrontFilteredCharacter[] {
+      return state.characters.map((item) => {
+        return {
+          id: item.id,
+          name: item.name,
+          image: item.image,
+        };
+      });
+    },
+  },
 });
